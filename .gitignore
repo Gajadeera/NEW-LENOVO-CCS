@@ -1,0 +1,36 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+
+# Build output
+frontend/dist/
+frontend/build/
+
+# Cache
+frontend/.cache/
+
+# Source maps
+*.map
+
+# IDE/Editor settings
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+
+# Lock files
+*.lock
+
+# Miscellaneous
+uploads/
