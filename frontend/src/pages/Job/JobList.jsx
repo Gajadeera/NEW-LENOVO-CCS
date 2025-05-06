@@ -114,7 +114,7 @@ const JobList = () => {
             if (filters.status) params.status = filters.status;
             if (filters.priority) params.priority = filters.priority;
 
-            const response = await axios.get('http://localhost:5000/jobs', {
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/jobs`, {
                 params,
                 headers: { Authorization: `Bearer ${currentUser.token}` }
             });

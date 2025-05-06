@@ -27,13 +27,13 @@ const CoordinatorDashboard = () => {
             setError('');
 
             const [jobsRes, partsRequestsRes] = await Promise.all([
-                axios.get('http://localhost:5000/jobs', {
+                axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/jobs`, {
                     params: {
                         status: ['New', 'Assigned', 'In Progress', 'On Hold']
                     },
                     headers: { Authorization: `Bearer ${user.token}` }
                 }),
-                axios.get('http://localhost:5000/parts_requests', {
+                axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/parts_requests`, {
                     params: {
                         status: 'Pending'
                     },

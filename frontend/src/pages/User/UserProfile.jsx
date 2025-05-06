@@ -193,7 +193,7 @@ const UserProfile = () => {
                     console.error('Invalid user ID:', id);
                 }
 
-                const response = await axios.get(`http://localhost:5000/users/${userId}`, {
+                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/users/${userId}`, {
                     headers: { Authorization: `Bearer ${currentUser.token}` }
                 });
 
@@ -225,7 +225,7 @@ const UserProfile = () => {
             setLoading(true);
 
             const response = await axios.put(
-                `http://localhost:5000/users/${userId}`,
+                `${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/users/${userId}`,
                 editData,
                 { headers: { Authorization: `Bearer ${currentUser.token}` } }
             );
@@ -242,7 +242,7 @@ const UserProfile = () => {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://localhost:5000/users/${userId}`, {
+            await axios.delete(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/users/${userId}`, {
                 headers: { Authorization: `Bearer ${currentUser.token}` }
             });
             navigate('/users');

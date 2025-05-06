@@ -59,7 +59,7 @@ const Users = () => {
             setLoading(true);
             setError('');
 
-            const response = await axios.get('http://localhost:5000/users/', {
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/users/`, {
                 params: {
                     page: filters.usersPage,
                     limit: filters.limit

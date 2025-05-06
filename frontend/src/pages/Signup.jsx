@@ -88,7 +88,7 @@ const Signup = ({ isOpen, onClose }) => {
             }
 
             await axios.post(
-                'http://localhost:5000/users',
+                `${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/users`,
                 userData,
                 {
                     headers: {

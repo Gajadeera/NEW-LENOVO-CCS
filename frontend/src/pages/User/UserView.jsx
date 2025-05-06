@@ -56,7 +56,7 @@ const userConfig = {
 
 const UserView = ({ userRole }) => (
     <ViewComponent
-        apiPath="http://localhost:5000/users"
+        apiPath={`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/users`}
         config={userConfig}
         titleKey="user"
         deleteMessage={(user) => `Are you sure you want to delete ${user?.name || 'this user'}'s account? This action cannot be undone.`}

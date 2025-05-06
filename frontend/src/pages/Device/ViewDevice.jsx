@@ -200,7 +200,7 @@ const deviceConfig = {
 const ViewDevice = () => (
     <ViewComponent
         backRoute="/devices"
-        apiPath="http://localhost:5000/devices"
+        apiPath="/devices"
         config={deviceConfig}
         titleKey="device"
         deleteMessage={(device) => `Are you sure you want to delete this device (${device.manufacturer} ${device.model_number})? This action cannot be undone.`}

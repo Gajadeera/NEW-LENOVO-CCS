@@ -64,19 +64,19 @@ const ManagerDashboard = () => {
                 inventoryRes,
                 partsRequestsRes
             ] = await Promise.all([
-                axios.get('http://localhost:5000/users', {
+                axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/users`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 }),
-                axios.get('http://localhost:5000/devices', {
+                axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/devices`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 }),
-                axios.get('http://localhost:5000/jobs', {
+                axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/jobs`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 }),
-                axios.get('http://localhost:5000/inventory', {
+                axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/inventory`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 }),
-                axios.get('http://localhost:5000/parts_requests', {
+                axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/parts_requests`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 })
             ]);

@@ -15,7 +15,7 @@ const DeleteUser = () => {
         const fetchUser = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:5000/users/${userId}`);
+                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/users/${userId}`);
                 setUser(response.data);
             } catch (err) {
                 setError(err.response?.data?.message || 'Failed to fetch user');
@@ -31,7 +31,7 @@ const DeleteUser = () => {
     const handleDelete = async () => {
         try {
             setDeleting(true);
-            await axios.delete(`http://localhost:5000/users/${userId}`);
+            await axios.delete(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/users/${userId}`);
             navigate('/users');
         } catch (err) {
             setError(err.response?.data?.message || 'Failed to delete user');

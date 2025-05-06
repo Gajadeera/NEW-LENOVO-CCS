@@ -50,7 +50,7 @@ const AdminDashboard = () => {
             setLoading(true);
             setError('');
 
-            const usersRes = await axios.get('http://localhost:5000/users', {
+            const usersRes = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/users`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
 

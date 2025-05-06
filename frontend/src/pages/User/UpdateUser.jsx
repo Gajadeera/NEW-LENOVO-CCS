@@ -31,7 +31,7 @@ const UpdateUser = ({ isOpen, onClose }) => {
         const fetchUser = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:5000/users/${userId}`, {
+                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/users/${userId}`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
 
@@ -125,7 +125,7 @@ const UpdateUser = ({ isOpen, onClose }) => {
             }
 
             await axios.put(
-                `http://localhost:5000/users/${userId}`,
+                `${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/users/${userId}`,
                 userData,
                 {
                     headers: { Authorization: `Bearer ${user.token}` }

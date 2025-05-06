@@ -37,7 +37,7 @@ const AddDeviceModal = ({ isOpen, onClose, onSuccess, currentUser }) => {
                 const storedUser = localStorage.getItem('user');
                 const token = storedUser ? JSON.parse(storedUser).token : null;
 
-                const response = await axios.get('http://localhost:5000/customers', {
+                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/customers`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
 
@@ -117,7 +117,7 @@ const AddDeviceModal = ({ isOpen, onClose, onSuccess, currentUser }) => {
             }
 
             await axios.post(
-                'http://localhost:5000/devices',
+                `${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/devices`,
                 deviceData,
                 { headers: { Authorization: `Bearer ${token}` } }
             );

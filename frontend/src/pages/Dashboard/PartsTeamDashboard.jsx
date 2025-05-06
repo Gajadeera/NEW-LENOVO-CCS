@@ -41,19 +41,19 @@ const PartsTeamDashboard = () => {
                 fulfilledRequestsRes,
                 lowStockItemsRes
             ] = await Promise.all([
-                axios.get('http://localhost:5000/parts_requests', {
+                axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/parts_requests`, {
                     params: { status: 'Pending' },
                     headers: { Authorization: `Bearer ${user.token}` }
                 }),
-                axios.get('http://localhost:5000/parts_requests', {
+                axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/parts_requests`, {
                     params: { status: 'Approved' },
                     headers: { Authorization: `Bearer ${user.token}` }
                 }),
-                axios.get('http://localhost:5000/parts_requests', {
+                axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/parts_requests`, {
                     params: { status: 'Fulfilled' },
                     headers: { Authorization: `Bearer ${user.token}` }
                 }),
-                axios.get('http://localhost:5000/inventory', {
+                axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/inventory`, {
                     params: { lowStock: true },
                     headers: { Authorization: `Bearer ${user.token}` }
                 })

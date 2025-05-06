@@ -44,7 +44,7 @@ const Home = () => {
         setError('');
 
         try {
-            const response = await axios.post('http://localhost:5000/auth/login', formData);
+            const response = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/auth/login`, formData);
             login({
                 ...response.data.user,
                 token: response.data.token

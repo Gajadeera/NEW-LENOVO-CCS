@@ -190,7 +190,7 @@ const jobConfig = {
             });
 
             // Fetch technicians for assignment dropdown
-            const techResponse = await axios.get('http://localhost:5000/users?role=technician', {
+            const techResponse = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/users?role=technician`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             // console.log(jobResponse.data)
@@ -215,7 +215,7 @@ const jobConfig = {
 const ViewJob = () => (
     <ViewComponent
         backRoute="/jobs"
-        apiPath="http://localhost:5000/jobs"
+        apiPath={`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/jobs`}
         config={jobConfig}
         titleKey="job"
         deleteMessage={(job) => `Are you sure you want to delete Job #${job.job_number}? This action cannot be undone.`}

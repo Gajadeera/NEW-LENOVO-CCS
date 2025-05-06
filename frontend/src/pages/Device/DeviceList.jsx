@@ -69,7 +69,7 @@ const DeviceList = () => {
             setLoading(true);
             setError('');
 
-            const response = await axios.get('http://localhost:5000/devices/', {
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/devices`, {
                 params: {
                     page: filters.page,
                     limit: filters.limit

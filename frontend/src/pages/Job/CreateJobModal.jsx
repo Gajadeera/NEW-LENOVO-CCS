@@ -41,13 +41,13 @@ const CreateJobModal = ({ isOpen, onClose, currentUser }) => {
                 const token = storedUser ? JSON.parse(storedUser).token : null;
 
                 const [customersRes, devicesRes, usersRes] = await Promise.all([
-                    axios.get('http://localhost:5000/customers', {
+                    axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/customers`, {
                         headers: { Authorization: `Bearer ${token}` }
                     }),
-                    axios.get('http://localhost:5000/devices', {
+                    axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/devices`, {
                         headers: { Authorization: `Bearer ${token}` }
                     }),
-                    axios.get('http://localhost:5000/users', {
+                    axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/users`, {
                         headers: { Authorization: `Bearer ${token}` }
                     })
                 ]);
@@ -128,7 +128,7 @@ const CreateJobModal = ({ isOpen, onClose, currentUser }) => {
             }
 
             const response = await axios.post(
-                'http://localhost:5000/jobs',
+                `${import.meta.env.VITE_REACT_APP_BACKEND_BASED_URL}/jobs`,
                 jobData,
                 {
                     headers: {
