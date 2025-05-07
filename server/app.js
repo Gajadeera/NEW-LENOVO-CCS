@@ -18,7 +18,7 @@ const NotificationsRoutes = require('./routes/notificationRoutes');
 const partsRequestRoutes = require('./routes/partsRequestRoutes');
 const serviceHistoryRoutes = require('./routes/serviceHistoryRoutes');
 const signatureRoutes = require('./routes/signatureRoutes');
-const workshoprepairRoutes = require('./routes/workshoprepairRoutes');
+const workshoprepairRoutes = require('./routes/workshopRepairRoutes');
 
 const app = express();
 
