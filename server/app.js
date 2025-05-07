@@ -30,9 +30,9 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-app.get('/', (req, res) => {
-    res.send('Home page of the backend');
-})
+// app.get('/', (req, res) => {
+//     res.send('Home page of the backend');
+// })
 
 // Routes
 app.use('/auth', authRoutes);
