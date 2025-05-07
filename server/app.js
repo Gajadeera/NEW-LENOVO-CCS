@@ -30,6 +30,10 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
+app.get('/', (req, res) => {
+    res.send('Home page of the backend');
+})
+
 // Routes
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
@@ -48,7 +52,7 @@ app.use('/workshop-repairs', workshoprepairRoutes);
 
 // 404 Handler
 app.use((req, res) => {
-    res.status(404).json({ message: 'Route not found onthe server' });
+    res.status(404).json({ message: 'Route not found' });
 });
 
 // JWT config check
