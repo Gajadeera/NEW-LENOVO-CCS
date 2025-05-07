@@ -20,9 +20,6 @@ const serviceHistoryRoutes = require('./routes/serviceHistoryRoutes');
 const signatureRoutes = require('./routes/signatureRoutes');
 const workshoprepairRoutes = require('./routes/workshoprepairRoutes');
 
-
-
-
 const app = express();
 
 // Connect to database
