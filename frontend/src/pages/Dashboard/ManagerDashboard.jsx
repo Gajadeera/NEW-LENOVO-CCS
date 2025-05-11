@@ -204,16 +204,7 @@ const ManagerDashboard = () => {
             key: 'role',
             header: 'Role'
         },
-        {
-            key: 'isActive',
-            header: 'Status',
-            render: (user) => (
-                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                    ${user.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                    {user.isActive ? 'Active' : 'Inactive'}
-                </span>
-            )
-        },
+
         {
             key: 'lastLogin',
             header: 'Last Login',

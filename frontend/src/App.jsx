@@ -88,97 +88,101 @@ import JobUpdates from './pages/System/JobUpdates';
 import ViewJob from './pages/Job/ViewJob';
 
 
+import { WebSocketProvider } from './context/WebSocketContext';
+
 const App = () => {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        {/* <Navbar /> */}
-        <Routes className="min-h-screen bg-antiquewhite">
-          {/* ========== PUBLIC ROUTES ========== */}
-          <Route path="/" element={<Home />} />
-          {/* <Route path="/login" element={<Login />} /> */}
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password/:token" element={<ResetPassword />} />
-          <Route path="/unauthorized" element={<Unauthorized />} />
+      <WebSocketProvider >
+        <BrowserRouter>
+          {/* <Navbar /> */}
+          <Routes className="min-h-screen bg-antiquewhite">
+            {/* ========== PUBLIC ROUTES ========== */}
+            <Route path="/" element={<Home />} />
+            {/* <Route path="/login" element={<Login />} /> */}
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
+            <Route path="/unauthorized" element={<Unauthorized />} />
 
-          {/* ========== AUTHENTICATED COMMON ROUTES ========== */}
-          <Route path="/profile" element={<PrivateRoute><ProfileModal /></PrivateRoute>} />
-          <Route path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
-          <Route path="/change-password" element={<PrivateRoute><ChangePassword /></PrivateRoute>} />
-          <Route path="/notifications" element={<PrivateRoute><Notifications /></PrivateRoute>} />
+            {/* ========== AUTHENTICATED COMMON ROUTES ========== */}
+            <Route path="/profile" element={<PrivateRoute><ProfileModal /></PrivateRoute>} />
+            <Route path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
+            <Route path="/change-password" element={<PrivateRoute><ChangePassword /></PrivateRoute>} />
+            <Route path="/notifications" element={<PrivateRoute><Notifications /></PrivateRoute>} />
 
-          {/* ========== DASHBOARD ========== */}
-          <Route path="/AdminDashboard" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
-          <Route path="/technicianDashboard" element={<PrivateRoute><TechnicianDashboard /></PrivateRoute>} />
-          <Route path="/managerDashboard" element={<PrivateRoute><ManagerDashboard /></PrivateRoute>} />
-          <Route path="/coordinatorDashboard" element={<PrivateRoute><CoordinatorDashboard /></PrivateRoute>} />
-          <Route path="/partsTeamDashboard" element={<PrivateRoute><PartsTeamDashboard /></PrivateRoute>} />
+            {/* ========== DASHBOARD ========== */}
+            <Route path="/AdminDashboard" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
+            <Route path="/technicianDashboard" element={<PrivateRoute><TechnicianDashboard /></PrivateRoute>} />
+            <Route path="/managerDashboard" element={<PrivateRoute><ManagerDashboard /></PrivateRoute>} />
+            <Route path="/coordinatorDashboard" element={<PrivateRoute><CoordinatorDashboard /></PrivateRoute>} />
+            <Route path="/partsTeamDashboard" element={<PrivateRoute><PartsTeamDashboard /></PrivateRoute>} />
 
-          {/* ========== USER MANAGEMENT ========== */}
-          <Route path="/users" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><UserList /></PrivateRoute>} />
-          <Route path="/users/:id" element={<PrivateRoute roles={['admin', 'manager']}><UserView /></PrivateRoute>} />
-          <Route path="/users/signup" element={<PrivateRoute roles={['admin', 'manager']}><Signup /></PrivateRoute>} />
-          <Route path="/users/:id/edit" element={<PrivateRoute roles={['admin', 'manager']}><EditUser /></PrivateRoute>} />
-          <Route path="/users/:id/delete" element={<PrivateRoute roles={['admin', 'manager']}><DeleteUser /></PrivateRoute>} />
-          <Route path="/users/:id/skills" element={<PrivateRoute roles={['admin', 'manager']}><UserSkills /></PrivateRoute>} />
-          <Route path="/users/role/:role" element={<PrivateRoute roles={['admin', 'manager']}><UserList /></PrivateRoute>} />
+            {/* ========== USER MANAGEMENT ========== */}
+            <Route path="/users" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><UserList /></PrivateRoute>} />
+            <Route path="/users/:id" element={<PrivateRoute roles={['admin', 'manager']}><UserView /></PrivateRoute>} />
+            <Route path="/users/signup" element={<PrivateRoute roles={['admin', 'manager']}><Signup /></PrivateRoute>} />
+            <Route path="/users/:id/edit" element={<PrivateRoute roles={['admin', 'manager']}><EditUser /></PrivateRoute>} />
+            <Route path="/users/:id/delete" element={<PrivateRoute roles={['admin', 'manager']}><DeleteUser /></PrivateRoute>} />
+            <Route path="/users/:id/skills" element={<PrivateRoute roles={['admin', 'manager']}><UserSkills /></PrivateRoute>} />
+            <Route path="/users/role/:role" element={<PrivateRoute roles={['admin', 'manager']}><UserList /></PrivateRoute>} />
 
-          {/* ========== JOB MANAGEMENT ========== */}
-          <Route path="/jobs" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><JobList /></PrivateRoute>} />
-          <Route path="/jobs/create" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><CreateJobModal /></PrivateRoute>} />
-          <Route path="/jobs/:id" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><ViewJob /></PrivateRoute>} />
-          <Route path="/jobs/:id/edit" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><EditJob /></PrivateRoute>} />
-          <Route path="/jobs/:id/assign" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><AssignJob /></PrivateRoute>} />
-          <Route path="/jobs/:id/status" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><UpdateJobStatus /></PrivateRoute>} />
-          <Route path="/jobs/:id/history" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><JobHistory /></PrivateRoute>} />
-          <Route path="/jobs/:id/updates" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><JobUpdates /></PrivateRoute>} />
-          <Route path="/jobs/customer/:customerId" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><JobsByCustomer /></PrivateRoute>} />
-          <Route path="/jobs/status/:status" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><JobsByStatus /></PrivateRoute>} />
+            {/* ========== JOB MANAGEMENT ========== */}
+            <Route path="/jobs" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><JobList /></PrivateRoute>} />
+            <Route path="/jobs/create" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><CreateJobModal /></PrivateRoute>} />
+            <Route path="/jobs/:id" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><ViewJob /></PrivateRoute>} />
+            <Route path="/jobs/:id/edit" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><EditJob /></PrivateRoute>} />
+            <Route path="/jobs/:id/assign" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><AssignJob /></PrivateRoute>} />
+            <Route path="/jobs/:id/status" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><UpdateJobStatus /></PrivateRoute>} />
+            <Route path="/jobs/:id/history" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><JobHistory /></PrivateRoute>} />
+            <Route path="/jobs/:id/updates" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><JobUpdates /></PrivateRoute>} />
+            <Route path="/jobs/customer/:customerId" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><JobsByCustomer /></PrivateRoute>} />
+            <Route path="/jobs/status/:status" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><JobsByStatus /></PrivateRoute>} />
 
-          {/* ========== CUSTOMER MANAGEMENT ========== */}
-          <Route path="/customers" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><CustomerList /></PrivateRoute>} />
-          <Route path="/customers/create" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><CreateCustomer /></PrivateRoute>} />
-          <Route path="/customers/:customerId" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><ViewCustomer /></PrivateRoute>} />
-          <Route path="/customers/:customerId/edit" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><EditCustomer /></PrivateRoute>} />
-          <Route path="/customers/:customerId/delete" element={<PrivateRoute roles={['admin', 'manager']}><DeleteCustomer /></PrivateRoute>} />
-          <Route path="/customers/location/:location" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><CustomersByLocation /></PrivateRoute>} />
+            {/* ========== CUSTOMER MANAGEMENT ========== */}
+            <Route path="/customers" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><CustomerList /></PrivateRoute>} />
+            <Route path="/customers/create" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><CreateCustomer /></PrivateRoute>} />
+            <Route path="/customers/:customerId" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><ViewCustomer /></PrivateRoute>} />
+            <Route path="/customers/:customerId/edit" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><EditCustomer /></PrivateRoute>} />
+            <Route path="/customers/:customerId/delete" element={<PrivateRoute roles={['admin', 'manager']}><DeleteCustomer /></PrivateRoute>} />
+            <Route path="/customers/location/:location" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><CustomersByLocation /></PrivateRoute>} />
 
-          {/* ========== DEVICE MANAGEMENT ========== */}
-          <Route path="/devices" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><DeviceList /></PrivateRoute>} />
-          <Route path="/devices/create" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><CreateDevice /></PrivateRoute>} />
-          <Route path="/devices/:id" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><ViewDevice /></PrivateRoute>} />
-          <Route path="/devices/:id/edit" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><EditDevice /></PrivateRoute>} />
-          <Route path="/devices/:id/delete" element={<PrivateRoute roles={['admin', 'manager']}><DeleteDevice /></PrivateRoute>} />
-          <Route path="/devices/type/:type" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><DevicesByType /></PrivateRoute>} />
-          <Route path="/devices/:id/service-history" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><DeviceServiceHistory /></PrivateRoute>} />
+            {/* ========== DEVICE MANAGEMENT ========== */}
+            <Route path="/devices" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><DeviceList /></PrivateRoute>} />
+            <Route path="/devices/create" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><CreateDevice /></PrivateRoute>} />
+            <Route path="/devices/:id" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><ViewDevice /></PrivateRoute>} />
+            <Route path="/devices/:id/edit" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><EditDevice /></PrivateRoute>} />
+            <Route path="/devices/:id/delete" element={<PrivateRoute roles={['admin', 'manager']}><DeleteDevice /></PrivateRoute>} />
+            <Route path="/devices/type/:type" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><DevicesByType /></PrivateRoute>} />
+            <Route path="/devices/:id/service-history" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><DeviceServiceHistory /></PrivateRoute>} />
 
-          {/* ========== INVENTORY MANAGEMENT ========== */}
-          <Route path="/inventory" element={<PrivateRoute roles={['admin', 'manager', 'parts_team']}><InventoryList /></PrivateRoute>} />
-          <Route path="/inventory/create" element={<PrivateRoute roles={['admin', 'manager', 'parts_team']}><CreateInventoryItem /></PrivateRoute>} />
-          <Route path="/inventory/:itemId" element={<PrivateRoute roles={['admin', 'manager', 'parts_team']}><ViewInventoryItem /></PrivateRoute>} />
-          <Route path="/inventory/:itemId/edit" element={<PrivateRoute roles={['admin', 'manager', 'parts_team']}><EditInventoryItem /></PrivateRoute>} />
-          <Route path="/inventory/low-stock" element={<PrivateRoute roles={['admin', 'manager', 'parts_team']}><LowStockItems /></PrivateRoute>} />
+            {/* ========== INVENTORY MANAGEMENT ========== */}
+            <Route path="/inventory" element={<PrivateRoute roles={['admin', 'manager', 'parts_team']}><InventoryList /></PrivateRoute>} />
+            <Route path="/inventory/create" element={<PrivateRoute roles={['admin', 'manager', 'parts_team']}><CreateInventoryItem /></PrivateRoute>} />
+            <Route path="/inventory/:itemId" element={<PrivateRoute roles={['admin', 'manager', 'parts_team']}><ViewInventoryItem /></PrivateRoute>} />
+            <Route path="/inventory/:itemId/edit" element={<PrivateRoute roles={['admin', 'manager', 'parts_team']}><EditInventoryItem /></PrivateRoute>} />
+            <Route path="/inventory/low-stock" element={<PrivateRoute roles={['admin', 'manager', 'parts_team']}><LowStockItems /></PrivateRoute>} />
 
-          {/* ========== WORKSHOP MANAGEMENT ========== */}
-          <Route path="/workshop-repairs" element={<PrivateRoute roles={['admin', 'manager', 'technician']}><WorkshopRepairs /></PrivateRoute>} />
-          <Route path="/workshop-repairs/create" element={<PrivateRoute roles={['admin', 'manager', 'technician']}><CreateWorkshopRepair /></PrivateRoute>} />
-          <Route path="/workshop-repairs/:repairId" element={<PrivateRoute roles={['admin', 'manager', 'technician']}><WorkshopRepairDetail /></PrivateRoute>} />
-          <Route path="/workshop-repairs/status/:status" element={<PrivateRoute roles={['admin', 'manager', 'technician']}><WorkshopRepairs /></PrivateRoute>} />
+            {/* ========== WORKSHOP MANAGEMENT ========== */}
+            <Route path="/workshop-repairs" element={<PrivateRoute roles={['admin', 'manager', 'technician']}><WorkshopRepairs /></PrivateRoute>} />
+            <Route path="/workshop-repairs/create" element={<PrivateRoute roles={['admin', 'manager', 'technician']}><CreateWorkshopRepair /></PrivateRoute>} />
+            <Route path="/workshop-repairs/:repairId" element={<PrivateRoute roles={['admin', 'manager', 'technician']}><WorkshopRepairDetail /></PrivateRoute>} />
+            <Route path="/workshop-repairs/status/:status" element={<PrivateRoute roles={['admin', 'manager', 'technician']}><WorkshopRepairs /></PrivateRoute>} />
 
-          {/* ========== PARTS REQUESTS ========== */}
-          <Route path="/parts-requests" element={<PrivateRoute roles={['admin', 'manager', 'technician', 'parts_team']}><PartsRequests /></PrivateRoute>} />
-          <Route path="/parts-requests/create" element={<PrivateRoute roles={['admin', 'manager', 'technician']}><CreatePartsRequest /></PrivateRoute>} />
-          <Route path="/parts-requests/:requestId" element={<PrivateRoute roles={['admin', 'manager', 'technician', 'parts_team']}><PartsRequestDetail /></PrivateRoute>} />
+            {/* ========== PARTS REQUESTS ========== */}
+            <Route path="/parts-requests" element={<PrivateRoute roles={['admin', 'manager', 'technician', 'parts_team']}><PartsRequests /></PrivateRoute>} />
+            <Route path="/parts-requests/create" element={<PrivateRoute roles={['admin', 'manager', 'technician']}><CreatePartsRequest /></PrivateRoute>} />
+            <Route path="/parts-requests/:requestId" element={<PrivateRoute roles={['admin', 'manager', 'technician', 'parts_team']}><PartsRequestDetail /></PrivateRoute>} />
 
-          {/* ========== FEEDBACK & SIGNATURES ========== */}
-          <Route path="/jobs/:id/feedback" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><CustomerFeedback /></PrivateRoute>} />
-          <Route path="/jobs/:id/signatures" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><CustomerSignatures /></PrivateRoute>} />
+            {/* ========== FEEDBACK & SIGNATURES ========== */}
+            <Route path="/jobs/:id/feedback" element={<PrivateRoute roles={['admin', 'manager', 'coordinator']}><CustomerFeedback /></PrivateRoute>} />
+            <Route path="/jobs/:id/signatures" element={<PrivateRoute roles={['admin', 'manager', 'coordinator', 'technician']}><CustomerSignatures /></PrivateRoute>} />
 
-          {/* ========== CATCH-ALL ROUTE ========== */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        {/* <Footer /> */}
-      </BrowserRouter>
+            {/* ========== CATCH-ALL ROUTE ========== */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          {/* <Footer /> */}
+        </BrowserRouter>
+      </WebSocketProvider>
     </AuthProvider>
   );
 };
