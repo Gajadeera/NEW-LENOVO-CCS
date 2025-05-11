@@ -18,14 +18,14 @@ function setupWebSocket(server, app) {
 
         try {
             const decoded = jwt.verify(token, config.jwt.secret);
-            const userId = decoded.userId;
+            const id = decoded.id;
 
-            activeConnections.set(userId, ws);
-            onlineUsers.add(userId);
-            console.log(`User ${userId} connected`);
+            activeConnections.set(id, ws);
+            onlineUsers.add(id);
+            console.log(`User ${id} connected`);
 
             broadcastOnlineUsers();
-            broadcastUserStatus(userId, true);
+            broadcastUserStatus(id, true);
 
             const heartbeatInterval = setInterval(() => {
                 if (ws.readyState === ws.OPEN) {
@@ -34,29 +34,29 @@ function setupWebSocket(server, app) {
             }, 30000);
 
             ws.on('message', (message) => {
-                console.log(`Received message from ${userId}: ${message}`);
+                console.log(`Received message from ${id}: ${message}`);
             });
 
             ws.on('close', () => {
                 clearInterval(heartbeatInterval);
-                activeConnections.delete(userId);
-                onlineUsers.delete(userId);
+                activeConnections.delete(id);
+                onlineUsers.delete(id);
                 broadcastOnlineUsers();
-                broadcastUserStatus(userId, false);
+                broadcastUserStatus(id, false);
             });
 
             ws.on('error', (error) => {
-                console.error(`WebSocket error for user ${userId}:`, error);
+                console.error(`WebSocket error for user ${id}:`, error);
                 clearInterval(heartbeatInterval);
-                activeConnections.delete(userId);
-                onlineUsers.delete(userId);
+                activeConnections.delete(id);
+                onlineUsers.delete(id);
                 broadcastOnlineUsers();
-                broadcastUserStatus(userId, false);
+                broadcastUserStatus(id, false);
             });
 
             ws.send(JSON.stringify({
                 type: 'ONLINE_USERS',
-                userIds: Array.from(onlineUsers)
+                ids: Array.from(onlineUsers)
             }));
 
         } catch (err) {
@@ -67,7 +67,7 @@ function setupWebSocket(server, app) {
     function broadcastOnlineUsers() {
         const message = JSON.stringify({
             type: 'ONLINE_USERS',
-            userIds: Array.from(onlineUsers)
+            ids: Array.from(onlineUsers)
         });
 
         wss.clients.forEach(client => {
@@ -77,10 +77,10 @@ function setupWebSocket(server, app) {
         });
     }
 
-    function broadcastUserStatus(userId, isOnline) {
+    function broadcastUserStatus(id, isOnline) {
         const message = JSON.stringify({
             type: 'USER_STATUS_CHANGE',
-            userId,
+            id,
             isOnline,
             timestamp: new Date().toISOString()
         });
