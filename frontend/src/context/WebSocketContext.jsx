@@ -24,7 +24,7 @@ export const WebSocketProvider = ({ children }) => {
 
         const wsUrl = baseUrl
             .replace('http://', 'ws://')
-            // .replace('https://', 'wss://')
+            .replace('https://', 'wss://')
             + `?token=${user.token}`; // Use token from user object
 
         const websocket = new WebSocket(wsUrl);
@@ -44,6 +44,7 @@ export const WebSocketProvider = ({ children }) => {
             } catch (error) {
                 console.error('Error parsing WebSocket message:', error);
             }
+
         };
 
         websocket.onerror = (error) => {
